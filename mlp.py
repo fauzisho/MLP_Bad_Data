@@ -8,8 +8,8 @@ from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense
 from tensorflow.keras.optimizers import Adam
 
-# augmented_images_path = 'dataset/TrainAugmentedImages'
-no_augmented_images_path = 'dataset/TrainImages'
+augmented_images_path = 'dataset/TrainAugmentedImages'
+# no_augmented_images_path = 'dataset/TrainImages'
 
 def load_data(base_path):
     """Load image data from positive and negative folders."""
@@ -26,7 +26,7 @@ def load_data(base_path):
     return np.array(X), np.array(y)
 
 # Load data
-X, y = load_data(no_augmented_images_path)
+X, y = load_data(augmented_images_path)
 
 # First split: 60% training and 40% temporary
 X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.4, random_state=42, stratify=y)
@@ -57,8 +57,8 @@ loss, accuracy = model.evaluate(X_test, y_test)
 print(f"Test Accuracy: {accuracy:.2f}")
 
 # Save the trained model
-model.save('no_aug_car_detection_model_60_20_20.h5')
-print("Model saved as 'no_aug_car_detection_model_60_20_20.h5'")
+model.save('augmented_images_path.h5')
+print("Model saved as 'augmented_images_path.h5'")
 
 # Plot training & validation accuracy
 plt.figure(figsize=(12, 5))
