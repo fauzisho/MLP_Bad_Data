@@ -76,11 +76,23 @@ if __name__ == "__main__":
     # Initialize the detector with your trained model
     model_path = 'car_detection_model_60_20_20.h5'  # Path to trained model
     no_aug_model_path = 'no_aug_car_detection_model_60_20_20.h5'  # Path to trained model
+    not_good_model_path = 'not_good_mlp_car_detection_model_momentum.h5'  # Path to trained model
+
     test_folder = 'dataset/TestImages'  # Folder containing test images
+    test_folder_scale = 'dataset/TestImages_Scale'  # Folder containing test images
 
     detector = CarDetector(model_path=model_path)
     test_folder_and_analyze(test_folder, detector)
+    test_folder_and_analyze(test_folder_scale, detector)
 
     print("no augmentation image")
     detector = CarDetector(model_path=no_aug_model_path)
     test_folder_and_analyze(test_folder, detector)
+    test_folder_and_analyze(test_folder_scale, detector)
+
+    print("bad mlp")
+    detector = CarDetector(model_path=not_good_model_path)
+    test_folder_and_analyze(test_folder, detector)
+    test_folder_and_analyze(test_folder_scale, detector)
+
+
